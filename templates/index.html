@@ -1,1 +1,23 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Swap</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Code Swap</h1>
+        <textarea id="input-code" placeholder="Ingresa aquí tu codigo :)..."></textarea>
+        <select id="conversion-direction">
+            <option value="py-to-java">Python a Java</option>
+            <option value="java-to-py">Java a Python</option>
+        </select>
+        <button onclick="convertCode()">Convertir</button>
+        <textarea id="output-code" placeholder="Al traducirse, tu codigo aparecerá aquí..." readonly></textarea>
+    </div>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>
