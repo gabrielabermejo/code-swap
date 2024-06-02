@@ -1,1 +1,65 @@
 
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e6e6fa; /* Light purple background color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+    border: 2px solid #dcdcdc;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #4b0082; /* Darker purple for the header */
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+    resize: none; /* Prevent resizing */
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #f9f9ff;
+    transition: border 0.3s;
+}
+
+textarea:focus {
+    border-color: #9400d3; /* Neon purple border */
+    box-shadow: 0 0 10px #9400d3; /* Neon effect */
+}
+
+select, button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+    background-color: #dcdcdc; /* Light purple for buttons and select */
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover, select:hover {
+    background-color: #d8bfd8; /* Slightly darker purple for hover effect */
+}
+
+button:focus, select:focus {
+    outline: none;
+    border-color: #ba55d3; /* Focus border color */
+}
