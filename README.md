@@ -8,6 +8,20 @@ La necesidad de Code Swap surge de las dificultades comunes que enfrentan los pr
 
 Además, la escalabilidad de Code Swap justifica su desarrollo continuo. La inclusión futura de más lenguajes de programación ampliará su alcance y utilidad, convirtiéndola en una herramienta integral para la comunidad de programadores. Funcionalidades adicionales como la detección de errores y las sugerencias de optimización incrementarán su valor educativo, ayudando a los usuarios a mejorar no solo en la traducción, sino también en la calidad del código que escriben. En resumen, Code Swap no solo responde a una necesidad actual, sino que también se posiciona como una herramienta versátil y de largo plazo para el aprendizaje y la programación eficiente.
 
+**Pasos para ejecutarlo:**
+
+1. Ingresar al repositorio de GitHub ... y descargar el archivo .zip, click en code, click en download zip y ya se estará descargando el archivo
+2. Te diriges al archivo que acabas de descargar, le das click derecho y le das click en extraer todo y se creara una carpeta
+3. Abres vscode 
+4. Click en file y click open folder
+5. Seleccionas la carpeta que acabas de extraer
+6. Abrir el archivo app.py 
+(Cabe resaltar que hay que tener instalado flask(para instalar flask, abrir la terminal y ejecutar el comando “pip install flask”) y un interprete de Python)
+7. Dar click en el botón de ejecutar, esta en la parte superior derecha de la ventana.
+8. Se va a generar un enlace http, copiar el enlace, abrir navegador y pegar el enlace.
+Con estos pasos se ejecutará el programa correctamente.
+
+
 **Funciones del Programa**
 
 Traducción de Código: La función principal de Code Swap es traducir código entre Python y Java. Los usuarios pueden ingresar código escrito en uno de estos lenguajes y recibir una traducción precisa en el otro, facilitando la comprensión y el aprendizaje de ambas sintaxis.
