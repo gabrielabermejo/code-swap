@@ -8,7 +8,7 @@ La necesidad de Code Swap surge de las dificultades comunes que enfrentan los pr
 
 Además, la escalabilidad de Code Swap justifica su desarrollo continuo. La inclusión futura de más lenguajes de programación ampliará su alcance y utilidad, convirtiéndola en una herramienta integral para la comunidad de programadores. Funcionalidades adicionales como la detección de errores y las sugerencias de optimización incrementarán su valor educativo, ayudando a los usuarios a mejorar no solo en la traducción, sino también en la calidad del código que escriben. En resumen, Code Swap no solo responde a una necesidad actual, sino que también se posiciona como una herramienta versátil y de largo plazo para el aprendizaje y la programación eficiente.
 
-**Pasos para ejecutarlo:**
+**Pasos para ejecutarlo**
 
 1. Ingresar al repositorio de GitHub ... y descargar el archivo .zip, click en code, click en download zip y ya se estará descargando el archivo
 2. Te diriges al archivo que acabas de descargar, le das click derecho y le das click en extraer todo y se creara una carpeta
