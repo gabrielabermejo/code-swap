@@ -10,17 +10,16 @@ Además, la escalabilidad de Code Swap justifica su desarrollo continuo. La incl
 
 **Pasos para ejecutarlo**
 
-1. Ingresar al repositorio de GitHub (https://github.com/gabrielabermejo/code-swap)... y descargar el archivo .zip, click en code, click en download zip y ya se estará descargando el archivo
-2. Te diriges al archivo que acabas de descargar, le das click derecho y le das click en extraer todo y se creara una carpeta
-3. Abres vscode 
-4. Click en file y click open folder
-5. Seleccionas la carpeta que acabas de extraer
-6. Abrir el archivo app.py 
+1. Ingresar al repositorio de GitHub https://github.com/gabrielabermejo/code-swap.git y descarga el archivo .zip, click en code, click en download zip y ya se estará descargando el archivo.
+2. Te diriges al archivo que acabas de descargar, le das click derecho y le das click en extraer todo y se creara una carpeta.
+3. Abres vscode.
+4. Click en file y click open folder.
+5. Seleccionas la carpeta que acabas de extraer.
+6. Abrir el archivo app.py.
 (Cabe resaltar que hay que tener instalado flask(para instalar flask, abrir la terminal y ejecutar el comando “pip install flask”) y un interprete de Python)
-7. Dar click en el botón de ejecutar, esta en la parte superior derecha de la ventana.
+7. Dar click en el botón de ejecutar, (está en la parte superior derecha de la ventana).
 8. Se va a generar un enlace http, copiar el enlace, abrir navegador y pegar el enlace.
 Con estos pasos se ejecutará el programa correctamente.
-
 
 **Funciones del Programa**
 
