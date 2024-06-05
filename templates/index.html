@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Swap</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('statico', filename='css/styles.css') }}">
 </head>
 <body>
     <div class="container">
@@ -18,6 +18,6 @@
         <button onclick="convertCode()">Convertir</button>
         <textarea id="output-code" placeholder="Al traducirse, tu codigo aparecerá aquí..." readonly></textarea>
     </div>
-    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    <script src="{{ url_for('statico', filename='js/scripts.js') }}"></script>
 </body>
 </html>
