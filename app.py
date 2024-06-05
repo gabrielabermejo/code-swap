@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, jsonify
+import re
 
 app = Flask(__name__)
 
@@ -77,31 +78,108 @@ def python_to_java(input_code):
     
     return java_code
 
+
+
 def java_to_python(input_code):
-    # Reemplaza las llaves en Java y puntos y comas
-    python_code = input_code.replace(';', '').replace('{', '').replace('}', '')
-    
-    # Reemplaza los 'System.out.println' con 'print'
-    python_code = python_code.replace('System.out.println', 'print')
-    
-    # Reemplaza las funciones public void con def en Python
+    """Converts basic Java code structure to equivalent Python.
+
+    Args:
+        input_code: The Java code string to be converted.
+
+    Returns:
+        The converted Python code string.
+    """
+
+    # Common replacements
+    python_code = input_code.replace('System.out.println', 'print')
     python_code = python_code.replace('public void', 'def')
-    
-    # Elimina la línea que contiene 'public void main(String[] args) {'
+    python_code = python_code.replace('public class', 'class')
+    python_code = python_code.replace('main(String[] args)', '__main__')
+
+    # Formatting
+    python_code = '\n'.join([line.strip() for line in python_code.splitlines()])  # Remove extra spaces
     lines = python_code.split('\n')
     formatted_lines = []
+    indent_level = 0
+
+    # Implementación para quitar todos los {}, } y ;
     for line in lines:
         stripped_line = line.strip()
-        if stripped_line.startswith('def main(String[] args)'):
-            continue  # Salta esta línea
-        if stripped_line.startswith('def'):
-            line = line.replace('(', '():').replace(' {', ':')
-        formatted_lines.append(line)
-    
-    # Combina las líneas nuevamente
+        # Remover los '{', '}' y ';'
+        if stripped_line.endswith('{'):
+            stripped_line = stripped_line[:-1].strip()
+        elif stripped_line.endswith('}'):
+            stripped_line = stripped_line[:-1].strip()
+            indent_level -= 1
+        if stripped_line.endswith(';'):
+            stripped_line = stripped_line[:-1].strip()
+        if stripped_line:
+            formatted_lines.append(' ' * (indent_level * 4) + stripped_line)
+        if stripped_line.endswith(':'):
+            indent_level += 1
+
     python_code = '\n'.join(formatted_lines)
-    
+
+    # Convert for loops
+    def replace_for_loops(match):
+        init_var, limit = match.groups()
+        return f'for {init_var} in range({limit}):'
+
+    python_code = re.sub(r'for \(int ([a-zA-Z_]\w*) = 0; \1 < (\d+); \1\+\+\)', replace_for_loops, python_code)
+
+    for_pattern = re.compile(r'for \((.*); (.*); (.*)\)')
+
+    def convert_for(match):
+        initialization, condition, increment = match.groups()
+        init_var, init_value = initialization.split('=')
+        init_var = init_var.strip()
+        init_value = init_value.strip()
+
+        cond_var, cond_operator, cond_value = condition.strip().split()
+
+        # Extract increment details
+        if '++' in increment:
+            increment_value = '1'
+        elif '--' in increment:
+            increment_value = '-1'
+        else:
+            increment_var, increment_value = increment.split('=')
+            increment_value = increment_value.strip()
+
+        # Attempt conversion to range-based for loop
+        if (init_value == '0' and cond_operator == '<' and
+                increment_value == '1' and init_var == cond_var):
+            return f'for {init_var} in range({cond_value}):'
+        else:
+            # Construct range based on operators
+            range_start = init_value
+            range_end = cond_value
+            if '<' in cond_operator:
+                range_end = cond_value
+            elif '<=' in cond_operator:
+                range_end = str(int(cond_value) + 1)
+            elif '>' in cond_operator:
+                range_start, range_end = cond_value, str(int(init_value) - 1)
+            elif '>=' in cond_operator:
+                range_start, range_end = cond_value, init_value
+
+            return f'for {init_var} in range({range_start}, {range_end}, {increment_value}):'
+
+    python_code = for_pattern.sub(convert_for, python_code)
+
+    # Convert while loop (basic replacement)
+    python_code = python_code.replace('while (', 'while ')
+
+    # Remove variable type declarations
+    python_code = re.sub(r'\b(int|float|double|String)\b ', '', python_code)
+
+    # Convert increments and decrements
+    python_code = re.sub(r'(\w+)\+\+', r'\1 += 1', python_code)
+    python_code = re.sub(r'(\w+)\-\-', r'\1 -= 1', python_code)
+
     return python_code
+
+
 
 @app.route('/')
 def index():
@@ -124,4 +202,3 @@ def convert():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
