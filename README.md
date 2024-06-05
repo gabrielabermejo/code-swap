@@ -36,6 +36,7 @@ Añadir Nuevas Funciones: Mejorar Code Swap con nuevas funciones como detección
 
 
 **Integrantes**
+
 NRC 2381
 - Gabriela Moreno. 
 - Fabian Pallares.
