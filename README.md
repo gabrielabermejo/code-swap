@@ -10,7 +10,7 @@ Además, la escalabilidad de Code Swap justifica su desarrollo continuo. La incl
 
 **Pasos para ejecutarlo**
 
-1. Ingresar al repositorio de GitHub ... y descargar el archivo .zip, click en code, click en download zip y ya se estará descargando el archivo
+1. Ingresar al repositorio de GitHub (https://github.com/gabrielabermejo/code-swap)... y descargar el archivo .zip, click en code, click en download zip y ya se estará descargando el archivo
 2. Te diriges al archivo que acabas de descargar, le das click derecho y le das click en extraer todo y se creara una carpeta
 3. Abres vscode 
 4. Click en file y click open folder
