@@ -4,18 +4,21 @@ import re
 app = Flask(__name__)
 
 def python_to_java(input_code):
-    # Reemplazar la definición de funciones
-    java_code = input_code.replace('def ', 'public static void ').replace('():', '() {')
+    # Reemplazar funciones
+    java_code = re.sub(r'def ([\w\d_]+)\(([^)]*)\):', r'public static void \1(\2) {', input_code)
 
-    # Reemplazar print() por System.out.println()
-    java_code = java_code.replace('print(', 'System.out.println(')
+    # Reemplazar print() con System.out.println()
+    java_code = re.sub(r'print\(([^)]*)\)', r'System.out.println(\1)', java_code)
 
-    # Reemplazar input() por Scanner
-    java_code = java_code.replace('int(input())', 'new Scanner(System.in).nextInt()')
-    java_code = java_code.replace('float(input())', 'new Scanner(System.in).nextFloat()')
-    java_code = java_code.replace('str(input())', 'new Scanner(System.in).nextLine()')
+    # Reemplazar input() con Scanner
+    java_code = re.sub(r'int\(input\(([^)]*)\)\)', r'new Scanner(System.in).nextInt(\1)', java_code)
+    java_code = re.sub(r'float\(input\(([^)]*)\)\)', r'new Scanner(System.in).nextFloat(\1)', java_code)
+    java_code = re.sub(r'str\(input\(([^)]*)\)\)', r'new Scanner(System.in).nextLine(\1)', java_code)
 
-    # Reemplazar comentarios
+    # prevencion adicional
+    java_code = re.sub(r'nextInt\(\)', r'nextInt()', java_code)
+
+    # Convertir comentarios
     java_code = java_code.replace('#', '//')
 
     # Convertir condicionales
@@ -81,22 +84,15 @@ def python_to_java(input_code):
 
 
 def java_to_python(input_code):
-    """Converts basic Java code structure to equivalent Python.
 
-    Args:
-        input_code: The Java code string to be converted.
-
-    Returns:
-        The converted Python code string.
-    """
-
-    # Common replacements
+    # reemplazos
     python_code = input_code.replace('System.out.println', 'print')
+    python_code = python_code.replace('System.out.print', 'print')
     python_code = python_code.replace('public void', 'def')
     python_code = python_code.replace('public class', 'class')
-    python_code = python_code.replace('main(String[] args)', '__main__')
+    python_code = python_code.replace('main(String[] args)', '_main_')
 
-    # Formatting
+    # formato
     python_code = '\n'.join([line.strip() for line in python_code.splitlines()])  # Remove extra spaces
     lines = python_code.split('\n')
     formatted_lines = []
@@ -120,14 +116,14 @@ def java_to_python(input_code):
 
     python_code = '\n'.join(formatted_lines)
 
-    # Convert for loops
+    # convertir loops
     def replace_for_loops(match):
         init_var, limit = match.groups()
         return f'for {init_var} in range({limit}):'
 
     python_code = re.sub(r'for \(int ([a-zA-Z_]\w*) = 0; \1 < (\d+); \1\+\+\)', replace_for_loops, python_code)
 
-    for_pattern = re.compile(r'for \((.*); (.*); (.*)\)')
+    for_pattern = re.compile(r'for \((.); (.); (.*)\)')
 
     def convert_for(match):
         initialization, condition, increment = match.groups()
@@ -137,7 +133,7 @@ def java_to_python(input_code):
 
         cond_var, cond_operator, cond_value = condition.strip().split()
 
-        # Extract increment details
+        # incrementos
         if '++' in increment:
             increment_value = '1'
         elif '--' in increment:
@@ -146,12 +142,12 @@ def java_to_python(input_code):
             increment_var, increment_value = increment.split('=')
             increment_value = increment_value.strip()
 
-        # Attempt conversion to range-based for loop
+        # range en loop
         if (init_value == '0' and cond_operator == '<' and
                 increment_value == '1' and init_var == cond_var):
             return f'for {init_var} in range({cond_value}):'
         else:
-            # Construct range based on operators
+            #  range
             range_start = init_value
             range_end = cond_value
             if '<' in cond_operator:
@@ -167,18 +163,27 @@ def java_to_python(input_code):
 
     python_code = for_pattern.sub(convert_for, python_code)
 
-    # Convert while loop (basic replacement)
+    # canviar while
     python_code = python_code.replace('while (', 'while ')
 
-    # Remove variable type declarations
+    # Remover variables
     python_code = re.sub(r'\b(int|float|double|String)\b ', '', python_code)
 
-    # Convert increments and decrements
+    # incrementos y decrementos
     python_code = re.sub(r'(\w+)\+\+', r'\1 += 1', python_code)
     python_code = re.sub(r'(\w+)\-\-', r'\1 -= 1', python_code)
 
-    return python_code
+    # convertir input 
+    for i, line in enumerate(formatted_lines):
+        if 'scanner.nextInt' in line:
+            parts = line.split('=')
+            var_name = parts[0].split()[-1]  # Obtener solo el nombre de la variable
+            prompt = parts[-1].split('(')[-1].split(')')[0].strip('"')
+            formatted_lines[i] = f'{var_name} = int(input("{prompt}: "))'
 
+    python_code = '\n'.join(formatted_lines)
+
+    return python_code
 
 
 @app.route('/')
