@@ -31,7 +31,10 @@ Interfaz de Usuario Intuitiva: Code Swap cuenta con una interfaz de usuario fác
 
 ![image](https://github.com/gabrielabermejo/code-swap/assets/142366964/479ac3f6-c69f-4c4d-9f18-e852bbd1b1a0)
 
-Como podemos ver en el ejemplo, la interfaz es smuy facil de utilizar.
+![image](https://github.com/gabrielabermejo/code-swap/assets/142366964/f7ae3ea1-f5fb-46d0-b6cc-0a23ed8b4106)
+
+
+Como podemos ver en el ejemplo, la interfaz es smuy facil de utilizar. Imagen 1(Python a java), imagen 2, (Java a python).
 
 
 **Maneras de Escalar el Programa**
