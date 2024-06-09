@@ -28,6 +28,7 @@ Traducción de Código: La función principal de Code Swap es traducir código e
 Interfaz de Usuario Intuitiva: Code Swap cuenta con una interfaz de usuario fácil de usar que permite a los estudiantes ingresar su código y obtener resultados rápidamente. La interfaz está diseñada para ser accesible incluso para aquellos con poca experiencia en programación, proporcionando una experiencia de usuario fluida y eficiente.
 
 **Ejemplo de ejecucion**
+
 ![image](https://github.com/gabrielabermejo/code-swap/assets/142366964/479ac3f6-c69f-4c4d-9f18-e852bbd1b1a0)
 
 Como podemos ver en el ejemplo, la interfaz es smuy facil de utilizar.
