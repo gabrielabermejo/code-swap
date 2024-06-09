@@ -1,6 +1,6 @@
 **Resumen**
 
-Code Swap es una herramienta diseñada para traducir código entre los lenguajes de programación Python y Java, dirigida especialmente a estudiantes de primeros semestres de ciencias de la computación. Su propósito principal es facilitar el aprendizaje y uso de estos lenguajes, centrándose en algoritmos básicos que incluyan ciclos basicos (Ejemplo: for, if, whiile). La aplicación permite a los usuarios ingresar código en uno de los lenguajes y obtener una traducción precisa al otro, simplificando así la comprensión y conversión de sintaxis y estructuras, sin abordar grados de complejidad avanzados.
+Code Swap es una herramienta diseñada para traducir código entre los lenguajes de programación Python y Java, dirigida especialmente a estudiantes de primeros semestres de ciencias de la computación. Su propósito principal es facilitar el aprendizaje y uso de estos lenguajes, centrándose en algoritmos básicos que incluyan ciclos basicos (Ejemplo: for, if, while). La aplicación permite a los usuarios ingresar código en uno de los lenguajes y obtener una traducción precisa al otro, simplificando así la comprensión y conversión de sintaxis y estructuras, sin abordar grados de complejidad avanzados.
 
 **Justificación**
 
