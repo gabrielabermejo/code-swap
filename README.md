@@ -47,19 +47,19 @@ Añadir Nuevas Funciones: Mejorar Code Swap con nuevas funciones como detección
 
 Soporta ciclos anidados: 
 Ejemplo: 
-# Bucle for con range
+#Bucle for con range
 print("Bucle for con range:")
 for i in range(1, 6):
     print(i)
 
-# Bucle while
+#Bucle while
 print("\nBucle while:")
 count = 0
 while count < 5:
     print(count)
     count += 1
 
-# Declaración if con condiciones anidadas
+#Declaración if con condiciones anidadas
 print("\nDeclaración if con condiciones anidadas:")
 x = 10
 if x > 5:
@@ -72,7 +72,7 @@ else:
 
 Soporta ciclos anidados:
 Ejemplo:
-# Ciclos anidados
+#Ciclos anidados
 print("\nCiclos anidados:")
 for i in range(1, 4):
     for j in range(1, 4):
@@ -80,26 +80,26 @@ for i in range(1, 4):
 
 Soporta el uso de estructuras lógicas como and, or y not.
 Ejemplo: 
-# Ejemplo de estructuras lógicas
+#Ejemplo de estructuras lógicas
 x = 5
 y = 10
 z = 15
 
-# Usando operador and
+#Usando operador and
 if x < y and y < z:
     print("x es menor que y y y es menor que z")
 
-# Usando operador or
+#Usando operador or
 if x < y or x < z:
     print("x es menor que y o x es menor que z")
 
-# Usando operador not
+#Usando operador not
 if not(x > y):
     print("x no es mayor que y")
 
 Soporta ciclos con otros ciclos dentro.
 Ejemplo, if dentro de un while:
-# Ejemplo de bucle while con declaración if dentro
+#Ejemplo de bucle while con declaración if dentro
 contador = 0
 
 while contador < 5:
@@ -160,7 +160,7 @@ def calculadora():
         else:
             print("Opción no válida. Intente nuevamente.")
         
-        # Ciclo for para mostrar los resultados previos
+        #Ciclo for para mostrar los resultados previos
         resultados = [suma(num1, num2), resta(num1, num2), multiplicacion(num1, num2), division(num1, num2)]
         print("\nResultados previos:")
         for i in range(len(resultados)):
@@ -173,13 +173,13 @@ def calculadora():
             elif i == 3:
                 print(f"División: {resultados[i]}")
         
-        # Preguntar al usuario si desea realizar otra operación
+        #Preguntar al usuario si desea realizar otra operación
         continuar = input("¿Desea realizar otra operación? (sí/no): ").strip().lower()
         if continuar != 'sí':
             print("Gracias por usar la calculadora. ¡Adiós!")
             break
 
-# Ejecutar la calculadora
+#Ejecutar la calculadora
 calculadora()
 
 
