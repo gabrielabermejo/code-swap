@@ -29,7 +29,7 @@ def python_to_java(input_code):
         list_name = match[0]
         list_items = match[1].split(',')
         list_items = [item.strip() for item in list_items]
-        java_array_declaration = f'int[] {list_name} = new int[]{{{", ".join(list_items)}}};\n'
+        java_array_declaration = f'int[] {list_name} = new int[]{{{", ".join(list_items)}}};'
         # Reemplazar la línea anterior con la nueva declaración del array
         java_code = re.sub(rf'{list_name} = \[([^\]]*)\]', java_array_declaration, java_code)
 
@@ -84,10 +84,16 @@ def python_to_java(input_code):
                         line = f'for (int {var_name} = 0; {var_name} < {end}; {var_name}++) {{'
                     else:
                         # Manejar casos especiales como el rango de raíz cuadrada
-                        range_match = re.search(r'for (\w+) in range\(2, int\(([^]+)\\*0\.5\) \+ 1\):', stripped_line)
+                        range_match = re.search(r'for (\w+) in range\(2, int\(([^)]+)\*0\.5\) \+ 1\):', stripped_line)
                         if range_match:
                             var_name, expr = range_match.groups()
                             line = f'for (int {var_name} = 2; {var_name} <= Math.sqrt({expr}); {var_name}++) {{'
+                        else:
+                            # Manejar casos de listas
+                            list_match = re.search(r'for (\w+) in (\w+):', stripped_line)
+                            if list_match:
+                                var_name, list_name = list_match.groups()
+                                line = f'for (int {var_name} : {list_name}) {{'
             indent_stack.append(indent)
             indent += 1
 
@@ -122,11 +128,19 @@ def java_to_python(input_code):
     # Basic replacements
     replacements = {
         'System.out.println': 'print',
+        ' public static void main(String[] args)':' ',
+        ' Scanner scanner = new Scanner(System.in)':' ',
+        'public static': 'def',
         'System.out.print': 'print',
         'public void': 'def',
         'public class': 'class',
         'main(String[] args)': 'main',
-        '//':'#'
+        '//': '#',
+        'int[]':' ',
+        'double[]':' ',
+        'float[]':' ',
+        'string[]':' '
+        
     }
     
     for java_syntax, python_syntax in replacements.items():
@@ -150,7 +164,7 @@ def java_to_python(input_code):
     
     python_code = '\n'.join(formatted_lines)
     
-    # Convert for loops
+    # Convert traditional for loops
     for_pattern = re.compile(r'for\s*\((int\s+)?(\w+)\s*=\s*(\d+);(\s*\2\s*[<=>!]+\s*\d+);(\s*\2\s*\+\+|--|[\+\-\*/]=\s*\d+)\)')
     
     def convert_for(match):
@@ -183,6 +197,17 @@ def java_to_python(input_code):
         return f'for {init_var} in range({init_value}, {range_end}):'
     
     python_code = for_pattern.sub(convert_for, python_code)
+    
+    # Convert enhanced for loops
+    enhanced_for_pattern = re.compile(r'for\s*\(\s*(int|float|double|String|boolean)?\s*(\w+)\s*:\s*(\w+)\s*\)')
+    
+    def convert_enhanced_for(match):
+        var_type = match.group(1)
+        var_name = match.group(2).strip()
+        collection = match.group(3).strip()
+        return f'for {var_name} in {collection}:'
+    
+    python_code = enhanced_for_pattern.sub(convert_enhanced_for, python_code)
     
     # Convert while loops
     python_code = re.sub(r'while\s*\(([^)]+)\)', r'while \1:', python_code)
@@ -219,17 +244,14 @@ def java_to_python(input_code):
         if 'scanner.nextInt' in line:
             parts = line.split('=')
             var_name = parts[0].split()[-1]
-            prompt = parts[-1].split('(')[-1].split(')')[0].strip('"')
-            formatted_lines[i] = f'{var_name.strip()} = int(input)'
+            formatted_lines[i] = f'{var_name.strip()} = int(input())'
         elif 'scanner.nextDouble' in line:
             parts = line.split('=')
             var_name = parts[0].split()[-1]
-            prompt = parts[-1].split('(')[-1].split(')')[0].strip('"')
-            formatted_lines[i] = f'{var_name.strip()} = float(input)'
+            formatted_lines[i] = f'{var_name.strip()} = float(input())'
         elif 'scanner.nextLine' in line:
             parts = line.split('=')
             var_name = parts[0].split()[-1]
-            prompt = parts[-1].split('(')[-1].split(')')[0].strip('"')
             formatted_lines[i] = f'{var_name.strip()} = input()'
         elif 'scanner.nextBoolean' in line:
             parts = line.split('=')
@@ -238,6 +260,19 @@ def java_to_python(input_code):
             formatted_lines[i] = f'{var_name.strip()} = bool(input("{prompt}: "))'
     
     python_code = '\n'.join(formatted_lines)
+    
+    # Convert array declarations
+    array_pattern = re.compile(r'\bint\[\]\s+(\w+)\s*=\s*\{([^\}]+)\};')
+    
+    def convert_array(match):
+        var_name = match.group(1).strip()
+        elements = match.group(2).strip()
+        return f'{var_name} = [ {elements} ] '
+    
+    python_code = array_pattern.sub(convert_array, python_code)
+    
+    # Ensure function declarations end with a colon
+    python_code = re.sub(r'(def\s+\w+\(.*?\))', r'\1:', python_code)
     
     return python_code
 
