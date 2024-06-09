@@ -72,6 +72,7 @@ else:
 
 Soporta ciclos anidados:
 Ejemplo:
+
 #Ciclos anidados
 print("\nCiclos anidados:")
 for i in range(1, 4):
@@ -80,6 +81,7 @@ for i in range(1, 4):
 
 Soporta el uso de estructuras lógicas como and, or y not.
 Ejemplo: 
+
 #Ejemplo de estructuras lógicas
 x = 5
 y = 10
@@ -99,6 +101,7 @@ if not(x > y):
 
 Soporta ciclos con otros ciclos dentro.
 Ejemplo, if dentro de un while:
+
 #Ejemplo de bucle while con declaración if dentro
 contador = 0
 
@@ -111,6 +114,7 @@ while contador < 5:
     contador += 1
 
 EJEMPLO CODIGO PARA QUE PRUEBE:
+
 def suma(a, b):
     return a + b
 
