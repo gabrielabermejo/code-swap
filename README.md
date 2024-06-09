@@ -29,6 +29,7 @@ Interfaz de Usuario Intuitiva: Code Swap cuenta con una interfaz de usuario fác
 
 **Ejemplo de ejecucion**
 ![image](https://github.com/gabrielabermejo/code-swap/assets/142366964/479ac3f6-c69f-4c4d-9f18-e852bbd1b1a0)
+
 Como podemos ver en el ejemplo, la interfaz es smuy facil de utilizar.
 
 
