@@ -43,6 +43,146 @@ Incorporación de Más Lenguajes de Programación: Para escalar Code Swap, se pu
 
 Añadir Nuevas Funciones: Mejorar Code Swap con nuevas funciones como detección de errores en el código, sugerencias para mejorar el código y análisis de rendimiento. Estas funciones no solo harán la traducción más precisa, sino que también ayudarán a los estudiantes a aprender a escribir mejor código y a mejorar sus habilidades de programación.
 
+**Ejemplo de codigos que soporta**
+
+Soporta ciclos anidados: 
+Ejemplo: 
+# Bucle for con range
+print("Bucle for con range:")
+for i in range(1, 6):
+    print(i)
+
+# Bucle while
+print("\nBucle while:")
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+
+# Declaración if con condiciones anidadas
+print("\nDeclaración if con condiciones anidadas:")
+x = 10
+if x > 5:
+    print("x es mayor que 5")
+    if x > 8:
+        print("x también es mayor que 8")
+else:
+    print("x es menor o igual que 5")
+
+
+Soporta ciclos anidados:
+Ejemplo:
+# Ciclos anidados
+print("\nCiclos anidados:")
+for i in range(1, 4):
+    for j in range(1, 4):
+        print(f"i: {i}, j: {j}")
+
+Soporta el uso de estructuras lógicas como and, or y not.
+Ejemplo: 
+# Ejemplo de estructuras lógicas
+x = 5
+y = 10
+z = 15
+
+# Usando operador and
+if x < y and y < z:
+    print("x es menor que y y y es menor que z")
+
+# Usando operador or
+if x < y or x < z:
+    print("x es menor que y o x es menor que z")
+
+# Usando operador not
+if not(x > y):
+    print("x no es mayor que y")
+
+Soporta ciclos con otros ciclos dentro.
+Ejemplo, if dentro de un while:
+# Ejemplo de bucle while con declaración if dentro
+contador = 0
+
+while contador < 5:
+    if contador % 2 == 0:
+        print(f"{contador} es par")
+    else:
+        print(f"{contador} es impar")
+    
+    contador += 1
+
+EJEMPLO CODIGO PARA QUE PRUEBE:
+def suma(a, b):
+    return a + b
+
+def resta(a, b):
+    return a - b
+
+def multiplicacion(a, b):
+    return a * b
+
+def division(a, b):
+    if b != 0:
+        return a / b
+    else:
+        return "Error: No se puede dividir por cero"
+
+def calculadora():
+    while True:
+        print("\nBienvenido a la calculadora básica")
+        print("Operaciones disponibles:")
+        print("1. Suma")
+        print("2. Resta")
+        print("3. Multiplicación")
+        print("4. División")
+        print("5. Salir")
+        
+        opcion = input("Ingrese el número de la operación que desea realizar: ")
+        
+        if opcion == '5':
+            print("Gracias por usar la calculadora. ¡Adiós!")
+            break
+        
+        num1 = float(input("Ingrese el primer número: "))
+        num2 = float(input("Ingrese el segundo número: "))
+        
+        if opcion == '1':
+            resultado = suma(num1, num2)
+            print(f"El resultado de la suma es: {resultado}")
+        elif opcion == '2':
+            resultado = resta(num1, num2)
+            print(f"El resultado de la resta es: {resultado}")
+        elif opcion == '3':
+            resultado = multiplicacion(num1, num2)
+            print(f"El resultado de la multiplicación es: {resultado}")
+        elif opcion == '4':
+            resultado = division(num1, num2)
+            print(f"El resultado de la división es: {resultado}")
+        else:
+            print("Opción no válida. Intente nuevamente.")
+        
+        # Ciclo for para mostrar los resultados previos
+        resultados = [suma(num1, num2), resta(num1, num2), multiplicacion(num1, num2), division(num1, num2)]
+        print("\nResultados previos:")
+        for i in range(len(resultados)):
+            if i == 0:
+                print(f"Suma: {resultados[i]}")
+            elif i == 1:
+                print(f"Resta: {resultados[i]}")
+            elif i == 2:
+                print(f"Multiplicación: {resultados[i]}")
+            elif i == 3:
+                print(f"División: {resultados[i]}")
+        
+        # Preguntar al usuario si desea realizar otra operación
+        continuar = input("¿Desea realizar otra operación? (sí/no): ").strip().lower()
+        if continuar != 'sí':
+            print("Gracias por usar la calculadora. ¡Adiós!")
+            break
+
+# Ejecutar la calculadora
+calculadora()
+
+
 **Estudiantes:**
 Fabian Pallares
 Gabriela Moreno
